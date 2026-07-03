@@ -1,0 +1,306 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate Now - HopeHands Foundation</title>
+    <!-- Tailwind CSS Script -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white font-sans text-gray-800 tracking-wide">
+
+   <!-- 1. NAVIGATION HEADER (Enhanced Size, Toned-down Weights & Hamburger Menu) -->
+    <header class="bg-white sticky top-0 z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+            
+            <!-- Logo Section -->
+            <div class="flex items-center space-x-3">
+                <span class="inline-block w-6 h-6 bg-black"></span>
+                <span class="text-2xl font-bold text-gray-900 tracking-tight">HopeHands Foundation</span>
+            </div>
+            
+            <!-- Navigation Links -->
+            <nav class="hidden lg:flex items-center space-x-10 text-gray-700">
+                <a href="{% url 'home' %}" class="text-xl font-medium text-gray-800 hover:text-blue-600 transition-colors">Home</a>
+                <a href="{% url 'about' %}" class="text-xl font-medium text-gray-800 hover:text-blue-600 transition-colors">About Us</a>
+                <a href="{% url 'causes' %}" class="text-xl font-medium text-gray-800 hover:text-blue-600 transition-colors">Causes</a>
+                <a href="{% url 'donate' %}" class="text-xl font-medium text-blue-600 transition-colors">Donate</a>
+                <a href="{% url 'contact' %}" class="text-xl font-medium text-gray-800 hover:text-blue-600 transition-colors">Contact</a>
+            </nav>
+            
+            <!-- Call to Action Button & Hamburger Menu -->
+            <div class="flex items-center space-x-6">
+                <!-- Desktop CTA Button -->
+                <div class="hidden lg:block">
+                    <a href="{% url 'donate' %}" class="bg-[#1e40af] hover:bg-blue-800 text-white font-medium text-xl px-8 py-3.5 rounded-xl shadow transition duration-200">
+                        Donate Now
+                    </a>
+                </div>
+
+                <!-- Hamburger Icon Button -->
+                <button type="button" onclick="toggleMobileMenu()" class="lg:hidden text-gray-900 p-2 focus:outline-none" aria-label="Toggle Menu">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile & Tablet Dropdown Menu -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-white border-t border-gray-100 shadow-lg transition-all">
+            <nav class="flex flex-col p-6 space-y-5 text-xl font-medium text-gray-800">
+                <a href="{% url 'home' %}" class="text-gray-800 hovertext-blue-600 py-2 border-b border-gray-50">Home</a>
+                <a href="{% url 'about' %}" class="hover:text-blue-600 py-2 border-b border-gray-50">About Us</a>
+                <a href="{% url 'causes' %}" class="hover:text-blue-600 py-2 border-b border-gray-50">Causes</a>
+                <a href="{% url 'donate' %}" class="text-blue-600 py-2 border-b border-gray-50">Donate</a>
+                <a href="{% url 'contact' %}" class="hover:text-blue-600 py-2 border-b border-gray-50">Contact</a>
+                <div class="pt-4">
+                    <a href="{% url 'donate' %}" class="bg-[#1e40af] text-white font-medium text-xl px-6 py-4 rounded-xl block text-center shadow">
+                        Donate Now
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+    </script>
+
+    <!-- Main Content Container -->
+    <main class="max-w-5xl mx-auto px-6 py-16">
+        
+        <!-- Header Text Section -->
+        <div class="mb-14">
+            <h1 class="text-5xl font-bold text-gray-900 mb-6 tracking-tight">Make a Difference Today</h1>
+            <p class="text-gray-800 text-2xl leading-relaxed font-light max-w-5xl">
+                Your generous donation will help us continue our mission to support communities in need. Choose an amount below or enter a custom amount to make a secure donation.
+            </p>
+        </div>
+
+        <!-- Donation Form -->
+        <form method="POST" action="" class="space-y-12">
+            {% csrf_token %}
+            
+            <!-- SECTION 1: Donor Information -->
+            <div class="space-y-6">
+                <h2 class="text-3xl font-bold text-gray-900 tracking-tight">Donor Information</h2>
+                
+                <div class="space-y-5 max-w-3xl">
+                    <!-- Name Input -->
+                    <div>
+                        <input type="text" id="name" name="name" placeholder="Name" 
+                               class="w-full text-xl px-6 py-4.5 bg-white border border-gray-200 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-800 placeholder-gray-400 text-gray-900 font-medium">
+                    </div>
+
+                    <!-- Email Input -->
+                    <div>
+                        <input type="email" id="email" name="email" placeholder="Email" 
+                               class="w-full text-xl px-6 py-4.5 bg-white border border-gray-200 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-800 placeholder-gray-400 text-gray-900 font-medium">
+                    </div>
+
+                    <!-- Address Input -->
+                    <div>
+                        <input type="text" id="address" name="address" placeholder="Address" 
+                               class="w-full text-xl px-6 py-4.5 bg-white border border-gray-200 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-800 placeholder-gray-400 text-gray-900 font-medium">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 2: Select Donation Amount -->
+            <div class="space-y-6">
+                <h2 class="text-3xl font-bold text-gray-900 tracking-tight">Select Donation Amount</h2>
+                
+                <!-- Quick Amount Buttons Selection -->
+                <div class="flex flex-wrap gap-4 max-w-3xl">
+                    <button type="button" class="border border-gray-200 text-xl font-bold text-gray-900 px-8 py-3.5 rounded-xl bg-gray-100 hover:bg-gray-200 transition">
+                        ₹500
+                    </button>
+                    <button type="button" class="border border-gray-200 text-xl font-bold text-gray-900 px-8 py-3.5 rounded-xl bg-gray-100 hover:bg-gray-200 transition">
+                        ₹1000
+                    </button>
+                </div>
+            </div>
+<div class="flex flex-wrap gap-4 max-w-3xl mt-2">
+                    <button type="button" class="border border-gray-200 text-xl font-bold text-gray-900 px-8 py-3.5 rounded-xl bg-gray-100 hover:bg-gray-200 transition">
+                        ₹2000
+                    </button>
+                    <button type="button" class="border border-gray-200 text-xl font-bold text-gray-900 px-8 py-3.5 rounded-xl bg-gray-100 hover:bg-gray-200 transition">
+                        Custom
+                    </button>
+                </div>
+
+                <!-- Cause Selection/Display Input Box -->
+                <div class="max-w-3xl mt-6">
+                    <input type="text" placeholder="Healthcare For Children" value="Healthcare For Children" disabled
+                           class="w-full text-xl px-6 py-4.5 bg-gray-50 border border-gray-200 rounded-2xl text-gray-500 font-medium cursor-not-allowed">
+                </div>
+            </div>
+
+            <!-- Action Area / Donate Button -->
+            <div class="pt-8 flex flex-col items-end max-w-3xl">
+                <button type="button" onclick="openPaymentModal()" class="bg-[#1e3a8a] text-white px-10 py-4 rounded-xl text-xl font-bold hover:bg-blue-900 transition duration-200 shadow-md">
+                    Donate Securely
+                </button>
+                <p class="text-gray-500 text-lg mt-3">
+                    Your donation is safe with us. We use secure payment processing.
+                </p>
+            </div>
+
+        
+        </form>
+    </main>
+<!-- Footer -->
+<footer class="bg-[#dbdee2] text-gray-700 py-12 px-4 mt-12">
+    <div class="max-w-6xl mx-auto flex flex-col items-center">
+        <!-- Navigation Links -->
+        <nav class="w-full flex flex-wrap justify-center gap-8 md:gap-16 text-sm font-medium mb-8">
+            <a href="#" class="hover:text-gray-900 transition-colors">About Us</a>
+            <a href="#" class="hover:text-gray-900 transition-colors">Our Programs</a>
+            <a href="#" class="hover:text-gray-900 transition-colors">Volunteer</a>
+            <a href="#" class="hover:text-gray-900 transition-colors">Donate</a>
+            <a href="#" class="hover:text-gray-900 transition-colors">Contact</a>
+        </nav>
+
+        <!-- Social Icons (Using Inline SVGs for clean rendering) -->
+        <div class="flex gap-6 mb-8 text-gray-600">
+            <!-- Facebook -->
+            <a href="#" class="hover:text-gray-900 transition-colors">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+            </a>
+            <!-- Twitter / X -->
+            <a href="#" class="hover:text-gray-900 transition-colors">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <!-- Instagram -->
+            <a href="#" class="hover:text-gray-900 transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01"/></svg>
+            </a>
+            <!-- LinkedIn -->
+            <a href="#" class="hover:text-gray-900 transition-colors">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+        </div>
+
+        <!-- Copyright -->
+        <p class="text-xs text-gray-500 tracking-wide text-center">
+            &copy; 2024 HopeHands Foundation. All rights reserved.
+        </p>
+    </div>
+</footer>
+<!-- ================= PAYMENT POPUP MODAL ================= -->
+<!-- ================= PAYMENT POPUP MODAL ================= -->
+    <div id="paymentModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-8 shadow-2xl border border-gray-100 relative">
+            
+            <!-- STEP 1: Select Payment Method & Enter Dummy Fields -->
+            <div id="paymentStep1" class="space-y-6">
+                <h3 class="text-2xl font-extrabold text-gray-900">Select Payment Method</h3>
+                
+                <!-- Online Options Buttons -->
+                <div class="grid grid-cols-2 gap-4">
+                    <label class="border border-gray-200 rounded-xl p-4 flex items-center space-x-3 cursor-pointer hover:bg-gray-50">
+                        <input type="radio" name="pay_method" checked class="w-5 h-5 text-blue-800">
+                        <span class="font-bold text-lg text-gray-800">Card Payment</span>
+                    </label>
+                    <label class="border border-gray-200 rounded-xl p-4 flex items-center space-x-3 cursor-pointer hover:bg-gray-50">
+                        <input type="radio" name="pay_method" class="w-5 h-5 text-blue-800">
+                        <span class="font-bold text-lg text-gray-800">UPI / QR</span>
+                    </label>
+                </div>
+
+                <!-- Dummy Fields -->
+                <div class="space-y-4 pt-2">
+                    <div>
+                        <label class="block text-gray-600 font-medium mb-1 text-base">Card or UPI Dummy ID</label>
+                        <!-- Added id="paymentInput" and oninput handler -->
+                        <input type="text" id="paymentInput" oninput="validateInput()" placeholder="e.g. 1234-5678-9101 or user@upi" 
+                               class="w-full text-lg px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-800">
+                    </div>
+                </div>
+
+                <!-- Footer Actions -->
+                <div class="flex justify-end space-x-4 pt-4">
+                    <button type="button" onclick="closePaymentModal()" class="text-gray-500 hover:text-gray-700 font-bold text-lg px-4 py-2">
+                        Cancel
+                    </button>
+                    <!-- Added id="proceedBtn" and disabled style attributes -->
+                    <button type="button" id="proceedBtn" onclick="goToStep2()" disabled
+                            class="bg-gray-300 text-gray-500 cursor-not-allowed px-6 py-3 rounded-xl font-bold text-lg transition">
+                        Proceed
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 2: Success and Thank You screen -->
+            <div id="paymentStep2" class="space-y-6 text-center hidden py-4">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path>
+                    </svg>
+                </div>
+
+                <h3 class="text-3xl font-extrabold text-gray-900">Donation Successful!</h3>
+                <p class="text-gray-600 text-xl leading-relaxed">
+                    Thank you so much for your kind support. Your contribution helps change lives.
+                </p>
+
+                <div class="pt-4">
+                    <button type="button" onclick="redirectToExit()" class="bg-[#1e3a8a] text-white w-full py-4 rounded-xl font-bold text-xl hover:bg-blue-900 transition shadow-md">
+                        OK
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Dynamic Steps Script Controller -->
+    <script>
+        function openPaymentModal() {
+            document.getElementById('paymentModal').classList.remove('hidden');
+            document.getElementById('paymentStep1').classList.remove('hidden');
+            document.getElementById('paymentStep2').classList.add('hidden');
+            
+            // Clear out field values on reopen
+            document.getElementById('paymentInput').value = '';
+            validateInput(); 
+        }
+
+        function closePaymentModal() {
+            document.getElementById('paymentModal').classList.add('hidden');
+        }
+
+        // Live input verification checks text length
+        function validateInput() {
+            const inputVal = document.getElementById('paymentInput').value.trim();
+            const proceedBtn = document.getElementById('proceedBtn');
+            
+            if (inputVal.length > 0) {
+                // Activate active color styling blocks
+                proceedBtn.disabled = false;
+                proceedBtn.classList.remove('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
+                proceedBtn.classList.add('bg-[#1e3a8a]', 'text-white', 'hover:bg-blue-900');
+            } else {
+                // Revert to locked state
+                proceedBtn.disabled = true;
+                proceedBtn.classList.add('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
+                proceedBtn.classList.remove('bg-[#1e3a8a]', 'text-white', 'hover:bg-blue-900');
+            }
+        }
+
+        function goToStep2() {
+            document.getElementById('paymentStep1').classList.add('hidden');
+            document.getElementById('paymentStep2').classList.remove('hidden');
+        }
+
+        function redirectToExit() {
+            window.location.href = "/exit/";
+        }
+    </script>
+</body>
+</html>
